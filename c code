@@ -1,9 +1,10 @@
-#include<stdio.h>
-#include<conio.h>
+#include <stdio.h>//space needs here
+#include <conio.h>
 
-void main()
+int main(int argc,char **argv) //gcc needs int return type and argv and argc are enviroment parameter
 {
   char text[50]="To C or not to C that is the question";
   printf("%s",text);
+  return  0;
   getch();
 }
