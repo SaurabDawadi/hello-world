@@ -2,15 +2,16 @@
 #include <conio.h>
 #include <graphics.h>
 #include <process.h>
-#define LEFT
-#define RIGHT
+#define LEFT -20
+#define RIGHT 20
 #define WIDTH 1600
 #define HEIGHT 700
 /*border*/
 typedef struct{
     int inih,inik;//ini means initial
     int r,h,k;
-    
+    int vx,vy;
+
 }ball;
 typedef struct{
     int len;
@@ -18,11 +19,11 @@ typedef struct{
     int inipos;
     int curpos;//current postion
 }launcher;
-launcher l;
+
 int RX1=150,RY1=50,RX2=1200,RY2=650
 #define rect_h 1050
 #define rect_w 600
-
+launcher l;
 /*laucher/kicker */
 int l.len=100,l.thick=20;
 
@@ -30,28 +31,51 @@ int l.len=100,l.thick=20;
 
 /*BALL  */
 ball b;
-int b.r=10;
-int b.h=(RX2-RX1)/2;
-int b.k=RY2-len-r;
+b.r=10;
+b.inih=(RX2-RX1)/2;
+b.inik=RY2-len-r;
+b.vx=10;
+b.vy=10;
 
 
 void screen(void);
+void changeKicker(int,int);
+void drawKicker(int);
 
-int r=10;
-int bx,by;
-int lbx,lby;
+
+
 int main(){
     int l.inipos=(RX2-RX1)/2-len;
+
     screen();
+
     drawBall(inih,inik,r);
     drawKicker();
     outtext("Press any key to start!!!!");
     getch();
-
+    b.h=b.inih;
+    b.k=b.inik;
     while(1){
-        
-        
-        moveBall();
+
+        /*ball at bound */
+        b.h+=b.vx;
+        b.k+=b.vy;
+        if(b.h>=RX2-b.r || b.h<=RX2+b.r){
+            b.vx=b.vx*(-1);
+        }
+        if(b.k<=RY1+b.r || b.k>=RY2-b.r){
+            b.vy=b.vx*(-1);
+            
+        }
+
+        moveBall(b.h,b,k);
+
+
+
+
+
+
+
 
         if(kbhit()){
             ch=getch();
@@ -63,7 +87,7 @@ int main(){
 
             }
         }
-    
+
 
 
 }
@@ -95,7 +119,8 @@ void deleteKicker(int pos){
 
 }
 void moveBall(){
-    
+
+
 }
 
 
