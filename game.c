@@ -54,11 +54,11 @@ int main(){
     b.r=10;
 
     b.inih =(RX2-RX1)/2;
-    b.inik = RY2-l.len-b.r;
-    b.vx = 10;
+    b.inik = RY2-l.thick-b.r;
+    b.vx = 1;
 
-    b.vy = 10;
-    l.inipos=(RX2-RX1)/2-l.len;
+    b.vy = 1;
+    l.inipos=(RX2-RX1)/2-l.len/2;
 
 
     screen();
@@ -73,14 +73,14 @@ int main(){
         /*ball at bound */
         b.h+=b.vx;
         b.k+=b.vy;
-        if(b.h>=RX2-b.r || b.h<=RX2+b.r){
+        if(b.h>=RX2-b.r || b.h<=RX1+b.r){
             b.vx=b.vx*(-1);
         }
         if(b.k<=RY1+b.r || b.k>=RY2-b.r){
             b.vy=b.vx*(-1);
 
         }
-        delay(180);
+        delay(20);
 
         moveBall(b.inih,b.inik,b.h,b.k,b.r);
         b.inih=b.h;
@@ -112,9 +112,10 @@ int main(){
 void screen(){
     initwindow(WIDTH,HEIGHT,"Brick  breaker");
     setfillstyle(SOLID_FILL,BROWN);
-    rectangle(RX1,RX2,RX2,RY2);
+    rectangle(RX1,RY1,RX2,RY2);
     floodfill(10,50,10);
-    rectangle(150,50,1200,650);
+    rectangle(RX1,RY1,RX2,RY2);
+
 
 }
 int  changeKicker(int in,int dis,int len,int thick){
