@@ -29,7 +29,8 @@ int RX1=150,RY1=50,RX2=1200,RY2=650;
 void screen(void);
 void changeKicker(int,int);
 void drawKicker(int);
-
+void moveBall();
+void drawBall(int ,int ,int );
 
 
 int main(){
@@ -45,15 +46,14 @@ int main(){
     b.r=10;
 
     b.inih =(RX2-RX1)/2;
-    b.inik = RY2-l.len-r;
+    b.inik = RY2-l.len-b.r;
     b.vx = 10;
     b.vy = 10;
-
-    int l.inipos=(RX2-RX1)/2-len;
-
+    l.inipos=(RX2-RX1)/2-l.len;
+    
+    
     screen();
-
-    drawBall(inih,inik,r);
+    drawBall(b.inih,b.inik,b.r);
     drawKicker();
     outtext("Press any key to start!!!!");
     getch();
@@ -120,6 +120,11 @@ void drawKicker(int pos){
 void deleteKicker(int pos){
     setcolor(BROWN);
     rectangle(pos,RY-thick,pos+len,RY);
+
+}
+void drawBall(int h,int k,int r){
+    setcolor(BLUE);
+    circle(h,k,r);
 
 }
 void moveBall(){
