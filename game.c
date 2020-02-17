@@ -138,13 +138,13 @@ int  changeKicker(int in,int dis,int len,int thick){
 }
 void drawKicker(int pos,int thick ,int len){
     setcolor(BLACK);
-    rectangle(pos,RY2-thick,pos+len,RY2);
+    rectangle(pos,RY2-thick-5,pos+len,RY2-5);
 
 
 }
 void deleteKicker(int pos,int thick,int len){
     setcolor(BROWN);
-    rectangle(pos,RY2-thick,pos+len,RY2);
+    rectangle(pos,RY2-thick-5,pos+len,RY2-5);
 
 }
 void drawBall(int h,int k,int r){
