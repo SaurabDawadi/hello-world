@@ -23,21 +23,7 @@ typedef struct{
 int RX1=150,RY1=50,RX2=1200,RY2=650;
 #define rect_h 1050
 #define rect_w 600
-launcher l;
-/*laucher/kicker */
-l.len=100
-l.thick=20;
 
-
-
-/*BALL  */
-ball b;
-b.r=10;
-
-b.inih =(RX2-RX1)/2;
-b.inik = RY2-len-r;
-b.vx = 10;
-b.vy = 10;
 
 
 void screen(void);
@@ -47,6 +33,22 @@ void drawKicker(int);
 
 
 int main(){
+    launcher l;
+    /*laucher/kicker */
+    l.len=100;
+    l.thick=20;
+
+
+
+    /*BALL */
+    ball b;
+    b.r=10;
+
+    b.inih =(RX2-RX1)/2;
+    b.inik = RY2-l.len-r;
+    b.vx = 10;
+    b.vy = 10;
+
     int l.inipos=(RX2-RX1)/2-len;
 
     screen();
