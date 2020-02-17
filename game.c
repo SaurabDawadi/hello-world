@@ -27,14 +27,22 @@ int RX1=150,RY1=50,RX2=1200,RY2=650;
 
 
 void screen(void);
-void changeKicker(int,int);
-void drawKicker(int);
-void moveBall();
+int changeKicker(int,int,int,int);
+void drawKicker(int,int ,int);
+void moveBall(int,int ,int ,int ,int);
 void drawBall(int ,int ,int );
+void deleteKicker(int,int,int);
+void deleteBall(int,int,int);
+
+
+
+
+
 
 
 int main(){
     launcher l;
+    char ch;//to check which key is hit
     /*laucher/kicker */
     l.len=100;
     l.thick=20;
@@ -50,12 +58,12 @@ int main(){
     b.vx = 10;
     b.vy = 10;
     l.inipos=(RX2-RX1)/2-l.len;
-    
-    
+
+
     screen();
     drawBall(b.inih,b.inik,b.r);
-    drawKicker();
-    outtext("Press any key to start!!!!");
+    drawKicker(l.inipos,l.thick,l.len);
+    outtext((char *)"Press any key to start!!!!");
     getch();
     b.h=b.inih;
     b.k=b.inik;
@@ -72,22 +80,24 @@ int main(){
 
         }
 
-        moveBall(b.h,b,k);
+        moveBall(b.inih,b.inik,b.h,b.k,b.r);
+        b.inih=b.h;
+        b.inik=b.k;
 
 
 
 
-
-
-
-
+        /* kicker */
+        l.curpos=l.inipos;
         if(kbhit()){
             ch=getch();
             switch(ch){
             case 'a' : case 'A':
-                changeKicker(iniKick,LEFT);
+                l.curpos=changeKicker(l.curpos,LEFT,l.len,l.thick);
+                break;
             case 'd': case 'D':
-                changeKicker(iniKick,RIGHT);
+                l.curpos=changeKicker(l.curpos,RIGHT,l.len,l.thick);
+                break;
 
             }
         }
@@ -105,21 +115,26 @@ void screen(){
     rectangle(150,50,1200,650);
 
 }
-void changeKicker(int in,int dis){
-    if(in>150 && 1200-len){
-          deleteKicker(in);
-          drawKicker(in+dis);
+int  changeKicker(int in,int dis,int len,int thick){
+    if(in>=150 && in<= 1200-len)   //boundary check
+        {
+          deleteKicker(in,thick,len);
+          drawKicker(in+dis,thick,len);
+          return (in+dis);
     }
+    return in;
+
 
 }
-void drawKicker(int pos){
+void drawKicker(int pos,int thick ,int len){
     setcolor(BLACK);
-    rectangle(pos,RY-thick,pos+len,RY);
+    rectangle(pos,RY2-thick,pos+len,RY2);
+    
 
 }
-void deleteKicker(int pos){
+void deleteKicker(int pos,int thick,int len){
     setcolor(BROWN);
-    rectangle(pos,RY-thick,pos+len,RY);
+    rectangle(pos,RY2-thick,pos+len,RY2);
 
 }
 void drawBall(int h,int k,int r){
@@ -127,9 +142,15 @@ void drawBall(int h,int k,int r){
     circle(h,k,r);
 
 }
-void moveBall(){
+void moveBall(int inih,int inik,int h,int k,int r){
+    deleteBall(inih,inik,r);
+    setcolor(BLUE);
+    drawBall(h,k,r);
 
-
+}
+void deleteBall(int h,int k,int r){
+    setcolor(BROWN);
+    circle(h,k,r);
 }
 
 
