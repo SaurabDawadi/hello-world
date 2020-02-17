@@ -77,7 +77,7 @@ int main(){
             b.vx=b.vx*(-1);
         }
         if(b.k<=RY1+b.r || b.k>=RY2-b.r){
-            b.vy=b.vx*(-1);
+            b.vy=b.vy*(-1);
 
         }
         delay(5);
@@ -114,9 +114,6 @@ void screen(){
     setfillstyle(SOLID_FILL,BROWN);
     rectangle(RX1,RY1,RX2,RY2);
     floodfill(10,50,10);
-    rectangle(RX1,RY1,RX2,RY2);
-
-
 }
 int  changeKicker(int in,int dis,int len,int thick){
     if(in>=150 || in<=1200-len)   //boundary check
