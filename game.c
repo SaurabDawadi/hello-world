@@ -2,8 +2,8 @@
 #include <conio.h>
 #include <graphics.h>
 #include <process.h>
-#define LEFT -20
-#define RIGHT 20
+#define LEFT -100
+#define RIGHT 100
 #define WIDTH 1600
 #define HEIGHT 700
 /*border*/
@@ -56,6 +56,7 @@ int main(){
     b.inih =(RX2-RX1)/2;
     b.inik = RY2-l.len-b.r;
     b.vx = 10;
+
     b.vy = 10;
     l.inipos=(RX2-RX1)/2-l.len;
 
@@ -79,6 +80,7 @@ int main(){
             b.vy=b.vx*(-1);
 
         }
+        delay(180);
 
         moveBall(b.inih,b.inik,b.h,b.k,b.r);
         b.inih=b.h;
@@ -116,7 +118,7 @@ void screen(){
 
 }
 int  changeKicker(int in,int dis,int len,int thick){
-    if(in>=150 && in<= 1200-len)   //boundary check
+    if(in>=150 || in<=1200-len)   //boundary check
         {
           deleteKicker(in,thick,len);
           drawKicker(in+dis,thick,len);
@@ -129,7 +131,7 @@ int  changeKicker(int in,int dis,int len,int thick){
 void drawKicker(int pos,int thick ,int len){
     setcolor(BLACK);
     rectangle(pos,RY2-thick,pos+len,RY2);
-    
+
 
 }
 void deleteKicker(int pos,int thick,int len){
@@ -138,13 +140,13 @@ void deleteKicker(int pos,int thick,int len){
 
 }
 void drawBall(int h,int k,int r){
-    setcolor(BLUE);
+    setcolor(BLACK);
     circle(h,k,r);
 
 }
 void moveBall(int inih,int inik,int h,int k,int r){
     deleteBall(inih,inik,r);
-    setcolor(BLUE);
+    setcolor(BLACK);
     drawBall(h,k,r);
 
 }
