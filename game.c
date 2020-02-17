@@ -55,9 +55,9 @@ int main(){
 
     b.inih =(RX2-RX1)/2;
     b.inik = RY2-l.thick-b.r;
-    b.vx = 1;
+    b.vx = 5;
 
-    b.vy = 1;
+    b.vy = 5;
     l.inipos=(RX2-RX1)/2-l.len/2;
 
 
@@ -80,7 +80,7 @@ int main(){
             b.vy=b.vy*(-1);
 
         }
-        delay(5);
+        delay(0.00001);
 
         moveBall(b.inih,b.inik,b.h,b.k,b.r);
         b.inih=b.h;
@@ -112,6 +112,7 @@ int main(){
 void screen(){
     initwindow(WIDTH,HEIGHT,"Brick  breaker");
     setfillstyle(SOLID_FILL,BROWN);
+    setcolor(YELLOW);
     rectangle(RX1,RY1,RX2,RY2);
     floodfill(10,50,10);
 }
