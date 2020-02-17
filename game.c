@@ -20,22 +20,24 @@ typedef struct{
     int curpos;//current postion
 }launcher;
 
-int RX1=150,RY1=50,RX2=1200,RY2=650
+int RX1=150,RY1=50,RX2=1200,RY2=650;
 #define rect_h 1050
 #define rect_w 600
 launcher l;
 /*laucher/kicker */
-int l.len=100,l.thick=20;
+l.len=100
+l.thick=20;
 
 
 
 /*BALL  */
 ball b;
 b.r=10;
-b.inih=(RX2-RX1)/2;
-b.inik=RY2-len-r;
-b.vx=10;
-b.vy=10;
+
+b.inih =(RX2-RX1)/2;
+b.inik = RY2-len-r;
+b.vx = 10;
+b.vy = 10;
 
 
 void screen(void);
@@ -65,7 +67,7 @@ int main(){
         }
         if(b.k<=RY1+b.r || b.k>=RY2-b.r){
             b.vy=b.vx*(-1);
-            
+
         }
 
         moveBall(b.h,b,k);
