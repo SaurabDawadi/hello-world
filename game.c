@@ -62,24 +62,29 @@ int main(){
 
 
     screen();
+     outtext((char *)"Press any key to start!!!!");
+    getch();
     drawBall(b.inih,b.inik,b.r);
     drawKicker(l.inipos,l.thick,l.len);
-    outtext((char *)"Press any key to start!!!!");
-    getch();
+
     b.h=b.inih;
     b.k=b.inik;
+    setcolor(RED);
+    rectangle(300,100,1000,200);
+   // floodfill()
     while(1){
 
         /*ball at bound */
-        b.h+=b.vx;
-        b.k+=b.vy;
-        if(b.h>=RX2-b.r || b.h<=RX1+b.r){
+        if(b.h>=RX2-b.r || b.h<=RX1+5+b.r){  //5 is added for boundary effect
             b.vx=b.vx*(-1);
         }
-        if(b.k<=RY1+b.r || b.k>=RY2-b.r){
+        if(b.k<=RY1+5+b.r || b.k>=(RY2-b.r-l.thick)){
             b.vy=b.vy*(-1);
 
         }
+        b.h+=b.vx;
+        b.k+=b.vy;
+
         delay(0.00001);
 
         moveBall(b.inih,b.inik,b.h,b.k,b.r);
@@ -91,9 +96,11 @@ int main(){
 
         /* kicker */
         l.curpos=l.inipos;
+        fflush(stdin);
         if(kbhit()){
             ch=getch();
-            switch(ch){
+            switch(ch)
+            {
             case 'a' : case 'A':
                 l.curpos=changeKicker(l.curpos,LEFT,l.len,l.thick);
                 break;
@@ -112,17 +119,17 @@ int main(){
 void screen(){
     initwindow(WIDTH,HEIGHT,"Brick  breaker");
     setfillstyle(SOLID_FILL,BROWN);
+    floodfill(10,50,10);
     setcolor(YELLOW);
     rectangle(RX1,RY1,RX2,RY2);
-    floodfill(10,50,10);
+
 }
 int  changeKicker(int in,int dis,int len,int thick){
-    if(in>=150 || in<=1200-len)   //boundary check
-        {
+
           deleteKicker(in,thick,len);
           drawKicker(in+dis,thick,len);
           return (in+dis);
-    }
+
     return in;
 
 
